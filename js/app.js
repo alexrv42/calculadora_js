@@ -42,7 +42,7 @@ function append(char)
 	{
 		return;
 	}
-	if (display.innerHTML == '0') // para no agregar más ceros
+	if (display.innerHTML == '0' && char != '.') // para no agregar más ceros
 	{
 		display.innerHTML = ''
 	}
