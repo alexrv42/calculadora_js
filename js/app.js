@@ -34,7 +34,7 @@ var Calculadora = {
 		{
 			return;
 		}
-		if (Calculadora.display.innerHTML == '0' && char != '.') // para no agregar más ceros
+		if (Calculadora.display.innerHTML == '0'  && char != '.') // para no agregar más ceros
 		{
 			Calculadora.display.innerHTML = ''
 		}
@@ -107,21 +107,32 @@ var Calculadora = {
 			default:
 				return;
 		}
+
+		// validar los 8 caracteres
+		if (Calculadora.display.innerHTML.length > 8) 
+		{
+			Calculadora.display.innerHTML = Calculadora.display.innerHTML.substring(0, 8);
+		}
 		Calculadora.primeraVez = false
 		Calculadora.op1 = Calculadora.display.innerHTML
 	},
 	feedback : function(element)
 	{
-		console.log('feedback')
 		element.style.padding = "3px 3px 3px 3px";
-		element.onmouseup = function () 
+
+		setTimeout(function () 
 		{
-			console.log('ya')
 			element.style.padding = "0px 0px 0px 0px";
-		}
+		}, 30);
 	},
 	cambiarSigno : function()
-	{
+	{	//no hacerlo si es un 0
+		if (Calculadora.display.innerHTML == '0') 
+		{
+			return;
+		}
+
+		// para alternar signo
 		if (Calculadora.display.innerHTML.charAt(0) != '-') 
 		{
 			Calculadora.display.innerHTML = '-' + Calculadora.display.innerHTML	
@@ -134,24 +145,24 @@ var Calculadora = {
 	inicializacion: function() 
 	{
 		// enlazar botones
-		Calculadora.btnClear.addEventListener('click', function(){Calculadora.clear()})
+		Calculadora.btnClear.addEventListener('click', function(){Calculadora.clear();Calculadora.feedback(Calculadora.btnClear)})
 		Calculadora.btn0.addEventListener('click', function(){Calculadora.append(0);Calculadora.feedback(Calculadora.btn0)})
 		Calculadora.btn1.addEventListener('click', function(){Calculadora.append(1);Calculadora.feedback(Calculadora.btn1)})
 		Calculadora.btn2.addEventListener('click', function(){Calculadora.append(2);Calculadora.feedback(Calculadora.btn2)})
-		Calculadora.btn3.addEventListener('click', function(){Calculadora.append(3)})
-		Calculadora.btn4.addEventListener('click', function(){Calculadora.append(4)})
-		Calculadora.btn5.addEventListener('click', function(){Calculadora.append(5)})
-		Calculadora.btn6.addEventListener('click', function(){Calculadora.append(6)})
-		Calculadora.btn7.addEventListener('click', function(){Calculadora.append(7)})
-		Calculadora.btn8.addEventListener('click', function(){Calculadora.append(8)})
-		Calculadora.btn9.addEventListener('click', function(){Calculadora.append(9)})
-		Calculadora.btnDot.addEventListener('click', function(){Calculadora.append('.')})
-		Calculadora.btnMas.addEventListener('click', function(){Calculadora.sumar()})
-		Calculadora.btnMenos.addEventListener('click', function(){Calculadora.restar()})
-		Calculadora.btnPor.addEventListener('click', function(){Calculadora.multiplicar()})
-		Calculadora.btnDiv.addEventListener('click', function(){Calculadora.dividir()})
-		Calculadora.btnIgual.addEventListener('click', function(){Calculadora.igual()})
-		Calculadora.btnSigno.addEventListener('click', function(){Calculadora.cambiarSigno()})
+		Calculadora.btn3.addEventListener('click', function(){Calculadora.append(3);Calculadora.feedback(Calculadora.btn3)})
+		Calculadora.btn4.addEventListener('click', function(){Calculadora.append(4);Calculadora.feedback(Calculadora.btn4)})
+		Calculadora.btn5.addEventListener('click', function(){Calculadora.append(5);Calculadora.feedback(Calculadora.btn5)})
+		Calculadora.btn6.addEventListener('click', function(){Calculadora.append(6);Calculadora.feedback(Calculadora.btn6)})
+		Calculadora.btn7.addEventListener('click', function(){Calculadora.append(7);Calculadora.feedback(Calculadora.btn7)})
+		Calculadora.btn8.addEventListener('click', function(){Calculadora.append(8);Calculadora.feedback(Calculadora.btn8)})
+		Calculadora.btn9.addEventListener('click', function(){Calculadora.append(9);Calculadora.feedback(Calculadora.btn9)})
+		Calculadora.btnDot.addEventListener('click', function(){Calculadora.append('.');Calculadora.feedback(Calculadora.btnDot)})
+		Calculadora.btnMas.addEventListener('click', function(){Calculadora.sumar();Calculadora.feedback(Calculadora.btnMas)})
+		Calculadora.btnMenos.addEventListener('click', function(){Calculadora.restar();Calculadora.feedback(Calculadora.btnMenos)})
+		Calculadora.btnPor.addEventListener('click', function(){Calculadora.multiplicar();Calculadora.feedback(Calculadora.btnPor)})
+		Calculadora.btnDiv.addEventListener('click', function(){Calculadora.dividir();Calculadora.feedback(Calculadora.btnDiv)})
+		Calculadora.btnIgual.addEventListener('click', function(){Calculadora.igual();Calculadora.feedback(Calculadora.btnIgual)})
+		Calculadora.btnSigno.addEventListener('click', function(){Calculadora.cambiarSigno();Calculadora.feedback(Calculadora.btnSigno)})
 	}
 }
 
